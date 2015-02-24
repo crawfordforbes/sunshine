@@ -37,8 +37,14 @@ post '/admin/pic' do
 end
 
 put '/admin/pics' do
-	binding.pry
 	puts "xxxxxxxxxxxxx"
+
+	checked_string = params.keys[0].split(',')
+	checked = []
+	checked_string.each do |id| 
+		checked<<id.to_s
+	end
+	puts checked
 end
 
 
