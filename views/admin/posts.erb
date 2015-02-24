@@ -1,0 +1,12 @@
+<a href="/admin">go back to admin home</a>
+<br>
+<ul>
+<% posts.each do |post| %>
+	<li>
+	<a href="./post/<%= post.id %>"><%= post.title %></a>
+	<p>Created on <%= post.created_at %>, last updated on <%= post.updated_at %></p>
+	<br>
+	<p><%= post.story %></p>
+	</li>
+<% end %>
+</ul>

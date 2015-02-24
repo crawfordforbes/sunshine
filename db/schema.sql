@@ -25,5 +25,18 @@ END;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	id INTEGER PRIMARY KEY ASC,
-	pass text
+	name text,
+	password_digest text
 );
+
+DROP TABLE IF EXISTS oldposts;
+CREATE TABLE oldposts (
+	id INTEGER PRIMARY KEY ASC,
+	title text,
+	story text,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+CREATE TRIGGER oldposts BEFORE UPDATE ON oldposts BEGIN 
+UPDATE oldposts SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
+END;

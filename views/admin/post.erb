@@ -1,0 +1,54 @@
+<div class="this_post_id" id="<%= post.id %>"></div>
+<a href="/admin">Go to admin main page</a>
+<br>
+<a href="/admin/posts">Go to admin posts page</a>
+<br>
+
+	<textarea id="title_box" type="text" name="newTitle"><%= post.title %></textarea>
+	<br>
+	<textarea id="story_box" type="text" name="newStory"><%= post.story %></textarea>
+	<br>
+	<button id="temp_change">See changes</button>
+<br>
+	<h3 id="temp_title"></h3>
+	<br>
+	<p id="temp_story"></p>
+
+<br>
+<!-- Button trigger modal -->
+<button id="modal_toggle" style="display: none;" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  So far so good
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 id="title_approval" class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="story_approval"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Let me try again</button>
+        <button id="update_butt" type="button" class="btn btn-primary" data-dismiss="modal">Make it so!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<input type="checkbox" id="delete_check">
+<button id="delete_button">DELETE</button>
+
+<ul>
+	<% pics.each do |pic| %>
+	<li><img src="../../<%= pic.url %>" style="height: 200px; width: auto;">
+		<p>http://www.sunshinenights.com/<%= pic.url %></p>
+		<br>
+	</li>
+	<% end %>
+</ul>
+
+<script src="../../update_story.js"></script>

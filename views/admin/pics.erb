@@ -1,3 +1,5 @@
+<a href="/admin">Go back to admin main page</a>
+<br>
 <h3>Add new pics here</h3>
 <form action='/admin/pic' enctype="multipart/form-data" method='POST'>
     <input name="file" type="file" /><p>check this box to add this picture to the carousel:</p>
@@ -6,8 +8,8 @@
     <button>Upload</button>
 </form>
 <br>
+<br>
 <ul>
-
 	<% pics.each do |pic| %>
 		<% if pic.carousel == 1 %>
 			<li>

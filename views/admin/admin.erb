@@ -1,3 +1,18 @@
 <a href="/admin/pics">manage pictures here</a>
 <br>
-<a href="/admin/posts">manage posts here</a>
+<a href="/admin/posts">edit old posts here</a>
+<br>
+<h3>Create a post here:</h3>
+<form action="/admin/post" method="post">
+	<textarea name="title" placeholder="title, please" required></textarea>
+	<textarea name="story" placeholder="story, please" required></textarea>
+	<button>Submit</button>
+</form>
+<ul>
+	<% pics.each do |pic| %>
+	<li><img src="../../<%= pic.url %>" style="height: 200px; width: auto;">
+		<p>http://www.sunshinenights.com/<%= pic.url %></p>
+		<br>
+	</li>
+	<% end %>
+</ul>

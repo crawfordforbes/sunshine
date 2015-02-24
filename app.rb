@@ -5,9 +5,11 @@ require 'json'
 require 'pry'
 require './lib/pic'
 require './lib/post'
+require './lib/oldpost'
 require './lib/user'
 require './lib/connection'
 require 'active_record'
+require 'bcrypt'
 include FileUtils::Verbose
 
 #landing page for user
@@ -16,7 +18,7 @@ get '/' do
 	erb(:index, locals: {all_posts: all_posts})
 end
 
-# show all pics to admin, CRUD etc.
+# CRUD pics
 get '/admin/pics' do
 	puts "GET ADMIN/PICS"
 	pics = Pic.all()
@@ -79,7 +81,43 @@ delete '/admin/pic/:id' do
 	redirect '/admin/pics'
 end
 
+#CRUD posts
+get '/admin/posts' do
+	posts = Post.all()
+	erb :"admin/posts", locals: {posts: posts}
+end
+
+#show individual post
+get '/admin/post/:id' do
+	post = Post.find_by(id: params[:id])
+	pics = Pic.all()
+	erb :"admin/post", locals: {post: post, pics: pics}
+end
+
+#update post
+put '/admin/post' do
+	puts params
+	post = Post.find_by(id: params[:id].to_i)
+	post.update(title: params[:title], story: params[:story])
+	redirect '/admin/posts'
+end
+
+#create post
+post '/admin/post' do
+	Post.create(title: params[:title], story: params[:story])
+	redirect '/admin/posts'
+end
+
+#archive deleted post, delete post in regular post table
+delete '/admin/post/:id' do
+	post = Post.find_by(id: params[:id])
+	Oldpost.create(title: post.title, story: post.story)
+	post.delete
+	redirect '/admin/posts'
+end
 #landing page for admin
 get '/admin' do
-	erb :"admin/admin"
+	pics = Pic.all()
+	erb :"admin/admin", locals: {pics: pics}
 end
+
