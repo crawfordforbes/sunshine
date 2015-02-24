@@ -1,0 +1,31 @@
+<h3>Add new pics here</h3>
+<form action='/admin/pic' enctype="multipart/form-data" method='POST'>
+    <input name="file" type="file" /><p>check this box to add this picture to the carousel:</p>
+    <input name="carousel_selection" type="checkbox" checked="yes">
+    <br>
+    <button>Upload</button>
+</form>
+<br>
+<ul>
+
+	<% pics.each do |pic| %>
+		<% if pic.carousel == 1 %>
+			<li>
+				<a href="./pic/<%= pic.id %>"><img class="thumb" src="../<%= pic.url %>"></a>
+				<p>http://www.sunshinenights.com/<%= pic.url %></p>
+				<p>check this box to add this pic to the carousel: 
+					<input class="checkbox" id="<%= pic.id %>" type="checkbox" name="carousel" checked="yes"></p>
+			</li>
+		<% else %>
+			<li>
+				<a href="./pic/<%= pic.id %>"><img class="thumb" src="../<%= pic.url %>"></a>
+				<p>http://www.sunshinenights.com/<%= pic.url %></p>
+				<p>check this box to add this pic to the carousel: 
+				<input class="checkbox" id="<%= pic.id %>" type="checkbox" name="carousel"></p>
+			</li>
+		<% end %>
+	<% end %>
+
+</ul>
+<button id="save_pic_status">Submit</button>
+<script src="../update_carousel.js"></script>

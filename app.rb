@@ -20,7 +20,7 @@ end
 get '/admin/pics' do
 	puts "GET ADMIN/PICS"
 	pics = Pic.all()
-	erb :"pics/pics", locals: {pics: pics}
+	erb :"admin/pics", locals: {pics: pics}
 end
 
 # upload a pic, save the file in public, and add the url and carousel status to the pics table
@@ -67,7 +67,7 @@ end
 # show an individual pic
 get '/admin/pic/:id' do
 	pic = Pic.find_by(id: params[:id])
-	erb :"pics/pic", locals: {pic: pic}
+	erb :"admin/pic", locals: {pic: pic}
 end
 
 #DESTROY!
