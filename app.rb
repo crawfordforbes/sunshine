@@ -10,18 +10,20 @@ require './lib/connection'
 require 'active_record'
 include FileUtils::Verbose
 
-
+#landing page for user
 get '/' do
 	all_posts = Post.all()
 	erb(:index, locals: {all_posts: all_posts})
 end
 
+# show all pics to admin, CRUD etc.
 get '/admin/pics' do
 	puts "GET ADMIN/PICS"
 	pics = Pic.all()
 	erb :"pics/pics", locals: {pics: pics}
 end
 
+# upload a pic, save the file in public, and add the url and carousel status to the pics table
 post '/admin/pic' do
 	puts "POST ADMIN/PIC"
 
@@ -36,9 +38,8 @@ post '/admin/pic' do
 	redirect '/admin/pics'
 end
 
+# update carousel status of each pic
 put '/admin/pics' do
-	puts "xxxxxxxxxxxxx"
-
 	checked_string = params.keys[0].split(',')
 	checked = []
 	checked_string.each do |id| 
@@ -60,15 +61,16 @@ put '/admin/pics' do
 			end
 		end
 	end
-redirect '/admin/pics'
+	redirect '/admin/pics'
 end
 
-
+# show an individual pic
 get '/admin/pic/:id' do
 	pic = Pic.find_by(id: params[:id])
 	erb :"pics/pic", locals: {pic: pic}
 end
 
+#DESTROY!
 delete '/admin/pic/:id' do
 	pic = Pic.find_by(id: params[:id])
 	filename = pic.url
@@ -77,6 +79,7 @@ delete '/admin/pic/:id' do
 	redirect '/admin/pics'
 end
 
+#landing page for admin
 get '/admin' do
 	erb :"admin/admin"
 end
