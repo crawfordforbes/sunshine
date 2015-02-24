@@ -42,9 +42,25 @@ put '/admin/pics' do
 	checked_string = params.keys[0].split(',')
 	checked = []
 	checked_string.each do |id| 
-		checked<<id.to_s
+		checked<<id.to_i
 	end
 	puts checked
+	pics = Pic.all()
+	pics.each do |pic|
+		x = 0
+		while x < checked.length do
+			if pic.id == checked[x]
+				puts "in if: pic id = #{pic.id}, x = #{x}"
+				pic.update(carousel: 1)
+				x = checked.length
+			else 
+				puts "in else: pic id = #{pic.id}, x = #{x}"
+				pic.update(carousel: 0)
+				x += 1
+			end
+		end
+	end
+redirect '/admin/pics'
 end
 
 
