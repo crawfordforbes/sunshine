@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+
+  
+  <meta charset="UTF-8">
+  <title>Sunshine Music</title>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="row">
+      <!-- bandcamp player -->
+      <iframe class="col-md-4" id="bc_player" style="border: 0; width: 400px; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=1990878009/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" seamless>
+        <a href="http://sunshinenights.bandcamp.com/album/down-and-up-blues">Down and Up Blues by Sunshine</a>
+      </iframe>
+      <!-- end bandcamp -->
+      <h1 class="col-md-2 col-md-offset-1" style="font-family: 'Niconne', cursive; font-size: 80px;">Sunshine</h1>
+      <!-- maybe small pic dump here -->
+    </div>
+    <div class="row">
+      <ul id="nav">
+        <li class="col-md-1 col-md-offset-3" id="news">news</li>
+        <li class="col-md-1" id="shows">shows</li>
+        <li class="col-md-1" id="pics">pics</li>
+        <li class="col-md-1" id="press">press</li>
+        <li class="col-md-1" id="videos">videos</li>
+        <li class="col-md-1" id="contact">contact</li>
+      </ul>
+    </div>
+  </header>
+  <div class="row">
+    <aside class="col-md-2">
+      <!-- upcoming shows -->
+      <div id="songkick">
+        <a href="http://www.songkick.com/artists/8323538" class="songkick-widget" data-theme="dark" data-track-button="on" data-detect-style="true" data-font-color="#000000" data-background-color="transparent">Sunshine tour dates</a>
+        <script src="//widget.songkick.com/widget.js"></script>
+      </div>
+      <!-- email -->
+      <div id="email_div">
+        <p>Enter your email to get Sunshine news in your inbox here:</p>
+        <form>
+          <input id="email_input" type="text" name="email" placeholder = "Let's folk rock!">
+          <button id="email_button">submit</button>
+        </form>
+      </div>
+      <!-- email end -->
+      <!-- facebook etc -->
+      <div id="follow_links">
+        <p>Sunshine's other places on the web:</p>
+        <a href="https://www.facebook.com/sunshinenights"><img src="../assets/facebook.png"></a>
+        <a href="https://twitter.com/sunshinenights"><img src="../assets/twitter.png"</a>
+        <a href="http://sunshinenights.bandcamp.com"><img src="https://s1.bcbits.com/img/buttons/bandcamp_60x60_white.png"></a>
+        <a href="https://www.songkick.com/artists/8323538"><img src="../assets/sk.png"></a>
+      </div>
+    </aside>
+    <div id="content" class="col-md-10">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>

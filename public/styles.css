@@ -1,0 +1,32 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  font-family: 'Niconne', cursive;
+  font-size: 90px;
+}
+
+#nav li {
+  list-style: none;
+}
+/*aside {
+  width: 180px;
+}*/
+
+#follow_links img {
+  width: 30px;
+  height: auto;
+}
+
+.thumb {
+  width: 100px;
+  height: auto;
+}

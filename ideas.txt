@@ -1,0 +1,65 @@
+/login
+	admin logs in
+
+admin/pics
+	CRUD pics and choose carousel pics
+	
+admin/posts
+	Create post, see snippet of all old posts and link to edit/delete
+admin/post/:id
+	update/delete post
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PAGE ONE
+header: navbar/logo, music video?
+left side: soundcloud, calendar, follow/like buttons, submit email for updates
+main section: posts (DEFAULT), pics, press, contact, videos
+
+pass: august2009 is the password, only capitalized if required
+user: sunshinenights, sunshinenights@gmail.com, or sunshinenight (usually if it's a person loggin in)
+
+bandcamp - http://blog.bandcamp.com/2013/06/12/all-new-players-up-twitter-too/ dl the record from the page? keep track of metrics (IMPORTANT)
+sunshinenights, august2009
+
+hosting: digital ocean
+
+calendar - plugin, hover on dates for more info?
+  should each gig get it's own page?
+  songkick
+posts - custom, one long string of posts? last 5 posts or all posts? gif/youtube compatible?
+pictures (carousel) - bootstrap? plugin? custom?  http://getbootstrap.com/javascript/#carousel
+press/reviews - same format as posts
+email - modal? unsub button as well? plugin? mailchimp.com see steveferrara.com for example
+bio
+
+PAGE TWO
+CRUD posts - custom
+users? will posts ever not be from Sunshine?
+password?
+
+PAGE THREE nope, part of regular page
+musicpage.com/sunshine
+presskit - custom
+form for signup?
+where to host kit?
+desc of kit?
+online kit?
+
+type: american typewriter: text
+zapfino (or something like that for logo)
