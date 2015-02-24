@@ -12,14 +12,14 @@
 		<% if pic.carousel == 1 %>
 			<li>
 				<a href="./pic/<%= pic.id %>"><img class="thumb" src="../<%= pic.url %>"></a>
-				<p><%= pic.url %></p>
+				<p>http://www.sunshinenights.com/<%= pic.url %></p>
 				<p>check this box to add this pic to the carousel: 
 					<input class="checkbox" id="<%= pic.id %>" type="checkbox" name="carousel" checked="yes"></p>
 			</li>
 		<% else %>
 			<li>
 				<a href="./pic/<%= pic.id %>"><img class="thumb" src="../<%= pic.url %>"></a>
-				<p><%= pic.url %></p>
+				<p>http://www.sunshinenights.com/<%= pic.url %></p>
 				<p>check this box to add this pic to the carousel: 
 				<input class="checkbox" id="<%= pic.id %>" type="checkbox" name="carousel"></p>
 			</li>

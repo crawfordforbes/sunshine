@@ -76,3 +76,7 @@ delete '/admin/pic/:id' do
 	File.delete("./public/#{filename}")
 	redirect '/admin/pics'
 end
+
+get '/admin' do
+	erb :"admin/admin"
+end
