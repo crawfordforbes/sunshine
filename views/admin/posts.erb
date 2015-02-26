@@ -3,6 +3,7 @@
 <ul>
 <% posts.each do |post| %>
 	<li>
+	<h4>this post is in <%= post.section %></h4>
 	<a href="./post/<%= post.id %>"><%= post.title %></a>
 	<p>Created on <%= post.created_at %>, last updated on <%= post.updated_at %></p>
 	<br>

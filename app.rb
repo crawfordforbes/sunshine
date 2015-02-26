@@ -13,14 +13,64 @@ require 'bcrypt'
 include FileUtils::Verbose
 enable :sessions
 
+#landing page for user
+get '/' do
+	erb :index
+end
+
+#respond to ajax for carousel
+get '/pics' do
+	content_type :json
+	pics = Pic.where("carousel = ?", 1)
+	pics.to_json
+end
+
+#news ajax
+get '/news' do
+	content_type :json
+	news = Post.where("section = ?", "news")
+	news.to_json
+end
+
+#shows ajax
+get '/shows' do
+	content_type :json
+	shows = Post.where("section = ?", "shows")
+	shows.to_json
+end
+
+#press ajax
+get '/press' do
+	content_type :json
+	press = Post.where("section = ?", "press")
+	press.to_json
+end
+
+#video ajax
+get '/videos' do
+	content_type :json
+	video = Post.where("section = ?", "video")
+	video.to_json
+end
+
+#contact ajax
+get '/contact' do
+	content_type :json
+	contact = Post.where("section = ?", "contact")
+	contact.to_json
+end
+
+# does what it says
 def authenticated?
 	session[:valid_user] == true
 end
 
+# log in
 get '/admin/login' do
 	erb :"admin/login"
 end
 
+#create a user
 post '/admin/user' do
 	if params[:password] != params[:pass_confirm]
 		redirect '/admin/login'
@@ -32,6 +82,7 @@ post '/admin/user' do
 	end
 end
 
+#actually log in
 post '/admin/session' do
 	user = User.find_by(name: params[:name])
 	if user
@@ -46,14 +97,9 @@ post '/admin/session' do
 	end
 end
 
-#landing page for user
-get '/' do
-	all_posts = Post.all()
-	erb(:index, locals: {all_posts: all_posts})
-end
-
 # CRUD pics
 get '/admin/pics' do
+	puts session[:valid_user]
 	if authenticated?
 	puts "GET ADMIN/PICS"
 	pics = Pic.all()
@@ -161,7 +207,7 @@ put '/admin/post' do
 		if authenticated?
 	puts params
 	post = Post.find_by(id: params[:id].to_i)
-	post.update(title: params[:title], story: params[:story])
+	post.update(title: params[:title], story: params[:story], section: params[:section])
 	redirect '/admin/posts'
 	else
 	redirect '/admin/login'
@@ -171,7 +217,7 @@ end
 #create post
 post '/admin/post' do
 		if authenticated?
-	Post.create(title: params[:title], story: params[:story])
+	Post.create(title: params[:title], story: params[:story], section: params[:section])
 	redirect '/admin/posts'
 	else
 	redirect '/admin/login'
@@ -182,12 +228,17 @@ end
 delete '/admin/post/:id' do
 		if authenticated?
 	post = Post.find_by(id: params[:id])
-	Oldpost.create(title: post.title, story: post.story)
+	Oldpost.create(title: post.title, story: post.story, section: post.section)
 	post.delete
 	redirect '/admin/posts'
 	else
 	redirect '/admin/login'
 end
+end
+
+delete '/admin/logout' do
+	session[:valid_user] = false
+	redirect '/'
 end
 
 #landing page for admin

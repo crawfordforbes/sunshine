@@ -3,6 +3,7 @@ CREATE TABLE posts (
 	id INTEGER PRIMARY KEY ASC,
 	title text,
 	story text,
+	section text,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
@@ -34,6 +35,7 @@ CREATE TABLE oldposts (
 	id INTEGER PRIMARY KEY ASC,
 	title text,
 	story text,
+	section text,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
