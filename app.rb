@@ -217,7 +217,6 @@ end
 #create post
 post '/admin/post' do
 		if authenticated?
-			binding.pry
 	Post.create(title: params[:title], story: params[:story], section: params[:section])
 	redirect '/admin/posts'
 	else

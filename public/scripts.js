@@ -26,7 +26,6 @@ var addContent = function(content){
 		h3.innerHTML = item.title;
 		p.innerHTML = item.story;
 		var wrapper = $("#" + item.section + "_wrapper")[0];
-		debugger
 		wrapper.setAttribute("class", "")
 		wrapper.appendChild(h3);
 		wrapper.appendChild(p);
