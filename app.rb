@@ -28,35 +28,35 @@ end
 #news ajax
 get '/news' do
 	content_type :json
-	news = Post.where("section = ?", "news")
+	news = Post.where("section = ?", "news").reverse_order
 	news.to_json
 end
 
 #shows ajax
 get '/shows' do
 	content_type :json
-	shows = Post.where("section = ?", "shows")
+	shows = Post.where("section = ?", "shows").reverse_order
 	shows.to_json
 end
 
 #press ajax
 get '/press' do
 	content_type :json
-	press = Post.where("section = ?", "press")
+	press = Post.where("section = ?", "press").reverse_order
 	press.to_json
 end
 
 #video ajax
 get '/videos' do
 	content_type :json
-	video = Post.where("section = ?", "video")
+	video = Post.where("section = ?", "videos").reverse_order
 	video.to_json
 end
 
 #contact ajax
 get '/contact' do
 	content_type :json
-	contact = Post.where("section = ?", "contact")
+	contact = Post.where("section = ?", "contact").reverse_order
 	contact.to_json
 end
 
@@ -217,6 +217,7 @@ end
 #create post
 post '/admin/post' do
 		if authenticated?
+			binding.pry
 	Post.create(title: params[:title], story: params[:story], section: params[:section])
 	redirect '/admin/posts'
 	else
