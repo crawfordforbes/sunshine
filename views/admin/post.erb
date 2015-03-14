@@ -8,6 +8,7 @@
 	<br>
 	<textarea id="story_box" type="text" name="newStory"><%= post.story %></textarea>
 	<br>
+  <input id="section_box" type="hidden" name="section" value="<%= post.section %>">
 	<button id="temp_change">See changes</button>
 <br>
 	<h3 id="temp_title"></h3>
@@ -31,6 +32,7 @@
       <div class="modal-body">
         <p id="story_approval"></p>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Let me try again</button>
         <button id="update_butt" type="button" class="btn btn-primary" data-dismiss="modal">Make it so!</button>

@@ -1,6 +1,7 @@
 var change = $("#temp_change")
 var title = $("#temp_title")
 var story = $("#temp_story")
+var section = $("#section_box")
 var update = $("#update_butt")
 var modal = $("#modal_toggle")
 var title_app = $("#title_approval")
@@ -20,7 +21,7 @@ change.click(function(){
 })
 
 update.click(function(){
-	var post_hash = {id: id, title: title_app[0].innerHTML, story: story_app[0].innerHTML};
+	var post_hash = {id: id, title: title_app[0].innerHTML, story: story_app[0].innerHTML, section: section[0].value};
 	$.ajax({
 		url: "/admin/post",
 		data: post_hash,

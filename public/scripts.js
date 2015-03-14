@@ -11,50 +11,82 @@ var videos_wrap = $("#videos_wrapper")[0];
 var contact_wrap = $("#contact_wrapper")[0];
 var press_wrap = $("#press_wrapper")[0];
 var shows_wrap = $("#shows_wrapper")[0];
-// append news to the DOM
-var show_news = function(news){
-	shows_wrap.setAttribute("class", "hidden")
-	press_wrap.setAttribute("class", "hidden")
-	contact_wrap.setAttribute("class", "hidden")
-	videos_wrap.setAttribute("class", "hidden")
-	pics_wrap.setAttribute("class", "hidden")
-	news_wrap.setAttribute("class", "")
-	news.forEach(function(item){
+var all_wraps = [news_wrap, pics_wrap, videos_wrap, contact_wrap, press_wrap, shows_wrap]
+var hideAll = function(){
+	all_wraps.forEach(function(item){
+		item.setAttribute("class", "hidden")
+	})
+}
+
+var addContent = function(content){
+	content.forEach(function(item){
+
 		var p = document.createElement('p');
 		var h3 = document.createElement('h3');
 		h3.innerHTML = item.title;
 		p.innerHTML = item.story;
-		news_wrap.appendChild(h3);
-		news_wrap.appendChild(p);
+		var wrapper = $("#" + item.section + "_wrapper")[0];
+		wrapper.setAttribute("class", "")
+		wrapper.appendChild(h3);
+		wrapper.appendChild(p);
 	});
 }
-
-//hit the server and get news
-var get_news = function(){
+	
+var getContent = function(section){
 	$.ajax({
-		url: '/news',
+		url: '/' + section,
 		type: 'get',
 		success: function(data){
-			show_news(data)
+			addContent(data)
 		}
 	})
 }
 
 news_link.click(function(){
-	if (news_wrap.innerHTML.length === 1){
-		get_news()
+	hideAll();
+		if (news_wrap.innerHTML.length <= 1){
+		getContent(news_link[0].id)
 	} else {
-		news_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "hidden")
-		videos_wrap.setAttribute("class", "hidden")
-		pics_wrap.setAttribute("class", "hidden")
 		news_wrap.setAttribute("class", "")
-	}
+	}	
 })
 
-//append pics to carousel template
+shows_link.click(function(){
+	hideAll();
+		if (shows_wrap.innerHTML.length <= 1){
+		getContent(shows_link[0].id)
+	} else {
+		shows_wrap.setAttribute("class", "")
+	}	
+})
+
+press_link.click(function(){
+	hideAll();
+		if (press_wrap.innerHTML.length <= 1){
+		getContent(press_link[0].id)
+	} else {
+		press_wrap.setAttribute("class", "")
+	}	
+})
+
+videos_link.click(function(){
+	hideAll();
+		if (videos_wrap.innerHTML.length <= 1){
+		getContent(videos_link[0].id)
+	} else {
+		videos_wrap.setAttribute("class", "")
+	}	
+})
+
+contact_link.click(function(){
+	hideAll();
+		if (contact_wrap.innerHTML.length <= 1){
+		getContent(contact_link[0].id)
+	} else {
+		contact_wrap.setAttribute("class", "")
+	}	
+})
+
 var show_pics = function(pics){
 	shows_wrap.setAttribute("class", "hidden")
 	press_wrap.setAttribute("class", "hidden")
@@ -102,180 +134,6 @@ pics_link.click(function(){
 	}
 })
 
-var show_videos = function(videos){
-	shows_wrap.setAttribute("class", "hidden")
-	press_wrap.setAttribute("class", "hidden")
-	contact_wrap.setAttribute("class", "hidden")
-	videos_wrap.setAttribute("class", "hidden")
-	news_wrap.setAttribute("class", "hidden")
-	pics_wrap.setAttribute("class", "hidden")
-	videos_wrap.setAttribute("class", "")
-	videos.forEach(function(item){
-		var p = document.createElement('p');
-		var h3 = document.createElement('h3');
-		h3.innerHTML = item.title;
-		p.innerHTML = item.story;
-		videos_wrap.appendChild(h3);
-		videos_wrap.appendChild(p);
-	});
-}
-
-//hit the server and get videos
-var get_videos = function(){
-	$.ajax({
-		url: '/videos',
-		type: 'get',
-		success: function(data){
-			show_videos(data)
-		}
-	})
-}
-
-videos_link.click(function(){
-	if (videos_wrap.innerHTML.length < 1){
-		get_videos()
-	} else {
-		news_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "hidden")
-		videos_wrap.setAttribute("class", "hidden")
-		pics_wrap.setAttribute("class", "hidden")
-		videos_wrap.setAttribute("class", "")
-	}
-})
-
-var show_contact = function(contact){
-	shows_wrap.setAttribute("class", "hidden")
-	press_wrap.setAttribute("class", "hidden")
-	contact_wrap.setAttribute("class", "hidden")
-	videos_wrap.setAttribute("class", "hidden")
-	news_wrap.setAttribute("class", "hidden")
-	pics_wrap.setAttribute("class", "hidden")
-	contact_wrap.setAttribute("class", "")
-	contact.forEach(function(item){
-		var p = document.createElement('p');
-		var h3 = document.createElement('h3');
-		h3.innerHTML = item.title;
-		p.innerHTML = item.story;
-		contact_wrap.appendChild(h3);
-		contact_wrap.appendChild(p);
-	});
-}
-
-//hit the server and get contact
-var get_contact = function(){
-	$.ajax({
-		url: '/contact',
-		type: 'get',
-		success: function(data){
-			show_contact(data)
-		}
-	})
-}
-
-contact_link.click(function(){
-	if (contact_wrap.innerHTML.length < 1){
-		get_contact()
-	} else {
-		news_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "hidden")
-		videos_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "hidden")
-		pics_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "")
-	}
-})
-
-var show_press = function(press){
-	shows_wrap.setAttribute("class", "hidden")
-	contact_wrap.setAttribute("class", "hidden")
-	press_wrap.setAttribute("class", "hidden")
-	videos_wrap.setAttribute("class", "hidden")
-	news_wrap.setAttribute("class", "hidden")
-	pics_wrap.setAttribute("class", "hidden")
-	press_wrap.setAttribute("class", "")
-	press.forEach(function(item){
-		var p = document.createElement('p');
-		var h3 = document.createElement('h3');
-		h3.innerHTML = item.title;
-		p.innerHTML = item.story;
-		press_wrap.appendChild(h3);
-		press_wrap.appendChild(p);
-	});
-}
-
-//hit the server and get press
-var get_press = function(){
-	$.ajax({
-		url: '/press',
-		type: 'get',
-		success: function(data){
-			show_press(data)
-		}
-	})
-}
-
-press_link.click(function(){
-	if (press_wrap.innerHTML.length < 1){
-		get_press()
-	} else {
-		news_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "hidden")
-		videos_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "hidden")
-		pics_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "")
-	}
-})
-
-var show_shows = function(shows){
-	contact_wrap.setAttribute("class", "hidden")
-	shows_wrap.setAttribute("class", "hidden")
-	videos_wrap.setAttribute("class", "hidden")
-	news_wrap.setAttribute("class", "hidden")
-	pics_wrap.setAttribute("class", "hidden")
-	shows_wrap.setAttribute("class", "")
-	shows.forEach(function(item){
-		var p = document.createElement('p');
-		var h3 = document.createElement('h3');
-		h3.innerHTML = item.title;
-		p.innerHTML = item.story;
-		shows_wrap.appendChild(h3);
-		shows_wrap.appendChild(p);
-	});
-}
-
-//hit the server and get shows
-var get_shows = function(){
-	$.ajax({
-		url: '/shows',
-		type: 'get',
-		success: function(data){
-			show_shows(data)
-		}
-	})
-}
-
-shows_link.click(function(){
-	if (shows_wrap.innerHTML.length < 1){
-		get_shows()
-	} else {
-		news_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "hidden")
-		press_wrap.setAttribute("class", "hidden")
-		contact_wrap.setAttribute("class", "hidden")
-		videos_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "hidden")
-		pics_wrap.setAttribute("class", "hidden")
-		shows_wrap.setAttribute("class", "")
-	}
-})
-
 window.onload = function(){
-	get_news()
+	getContent(news_link[0].id)
 };

@@ -1,22 +1,41 @@
+HOLY SHIT EDITING POSTS MAKES POSTS LOSE THEIR SECTION ATTRIBUTE, MEANING EDITS MAKE NOTHING SHOW UP.
+
+
+
+tour dates - only 2/3, rest on shows page
+"Sunshine's next 3 shows, click here for more"
+
+social media upper right hand corner, visible on page load
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /login
 	admin logs in
 
 admin/pics
 	CRUD pics and choose carousel pics
-	
+		admin/pic/:id for ajax stuff
+
 admin/posts
-	Create post, see snippet of all old posts and link to edit/delete
+	Create post, see snippet of all old posts and link to create/edit/delete
+admin/posts/new
+	show all pics with url, form to create post, confirmation section underneath
 admin/post/:id
-	update/delete post
-
-
-
-
-
-
-
-
-
+	read/update/delete post
 
 
 
