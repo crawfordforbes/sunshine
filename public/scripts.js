@@ -23,12 +23,16 @@ var addContent = function(content){
 
 		var p = document.createElement('p');
 		var h3 = document.createElement('h3');
+		var date = document.createElement('p')
 		h3.innerHTML = item.title;
 		p.innerHTML = item.story;
+		date.innerHTML = "<span style='font-size: 16px'>Posted on " + item.updated_at.split("T")[0] + "</span>";
 		var wrapper = $("#" + item.section + "_wrapper")[0];
 		wrapper.setAttribute("class", "")
 		wrapper.appendChild(h3);
 		wrapper.appendChild(p);
+		if (item.section === "news") {
+		wrapper.appendChild(date);}
 	});
 }
 	

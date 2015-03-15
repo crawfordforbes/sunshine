@@ -13,15 +13,25 @@ h3 {
 
 }
 body {
-  background-color: darkgrey;
+  font-family: 'Noto Serif', serif;
+  background-color: black;
   color: white;
 }
 
 h1 {
-  font-family: 'Niconne', cursive;
+  font-family: 'Tangerine', cursive;
   font-size: 120px;
   color: red;
 }
+
+#bandcamp {
+  margin: 10px;
+}
+
+/*#songkick {
+  background-color: red;
+  border-radius: 20px;
+}*/
 
 #nav {
   width: 100%;
@@ -43,8 +53,15 @@ h1 {
   border-radius: 5px;
 }
 
+#email_div {
+  margin: 30px 0 10px 5px;
+
+}
+
+
 #follow_links {
-  margin-top: 90px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #follow_links img {
@@ -60,16 +77,19 @@ h1 {
 }
 
 #content {
+  font-size: 20px;
+/*    border: 5px #333333 solid;*/
   background-color: white;
   border-radius: 20px;
   color: black;
 }
 
 #content h3 {
+
   display: block;
   font-size: 36px;
   border-bottom: 1px red solid;
-  margin: 25px auto 8px auto;
+  margin: 40px auto 8px auto;
   padding: 5px;
 }
 

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href='http://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
- 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <!-- Optional theme -->
+ <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+ <link href='http://fonts.googleapis.com/css?family=Tangerine:700' rel='stylesheet' type='text/css'>
+ <link href='http://fonts.googleapis.com/css?family=Noto+Serif' rel='stylesheet' type='text/css'>
 
-   <link rel="stylesheet" type="text/css" href="/styles.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ <!-- Latest compiled and minified JavaScript -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+ <!-- Optional theme -->
+
+ <link rel="stylesheet" type="text/css" href="/styles.css">
 
 
-  
-  <meta charset="UTF-8">
-  <title>Sunshine Music</title>
+
+ <meta charset="UTF-8">
+ <title>Sunshine Music</title>
 </head>
 <body>
   <div class="container">
@@ -23,20 +25,14 @@
       <div class="row">
         <!-- bandcamp player -->
         <div class="col-md-4">
-          <iframe style="border: 0; width: 250px; height: 120px; border-radius: 3px;" src="https://bandcamp.com/EmbeddedPlayer/album=2745204665/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://sunshinenights.bandcamp.com/album/sunshine-nights">sunshine nights by Sunshine</a></iframe>
+          <iframe id="bandcamp" style="border: 0; width: 250px; height: 120px; border-radius: 3px;" src="https://bandcamp.com/EmbeddedPlayer/album=2745204665/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://sunshinenights.bandcamp.com/album/sunshine-nights">sunshine nights by Sunshine</a></iframe>
         </div>
         <!-- end bandcamp -->
         <div class="col-md-4 text-center">
           <h1>Sunshine</h1>
         </div>
         <!-- maybe small pic dump here -->
-        <div id="follow_links" class="col-md-4 text-center">
-
-          <a href="https://www.facebook.com/sunshinenights" target="_blank"><img src="../../facebook.jpg"></a>
-          <a href="https://twitter.com/sunshinenights" target="_blank"><img src="../../twitter.jpg"></a>
-          <a href="http://sunshinenights.bandcamp.com" target="_blank"><img src="https://s1.bcbits.com/img/buttons/bandcamp_60x60_white.png"></a>
-          <a href="https://www.songkick.com/artists/8323538" target="_blank"><img src="../../songkick.jpg"></a>
-        </div>
+        
       </div>
       <div class="row">
         <ul id="nav">
@@ -47,31 +43,53 @@
           <li class="top_nav" id="videos">videos</li>
           <li class="top_nav" id="contact">contact</li>
         </ul>
+
       </div>
     </header>
     <div class="row">
       <aside class="col-md-2">
         <!-- upcoming shows -->
         <div id="songkick">
-          <a href="http://www.songkick.com/artists/8323538" class="songkick-widget" data-theme="dark" data-track-button="on" data-detect-style="true" data-font-color="#000000" data-background-color="transparent">Sunshine tour dates</a>
+          <a href="http://www.songkick.com/artists/8323538" class="songkick-widget" data-theme="dark" data-track-button="on" data-detect-style="true" data-background-color="transparent">Sunshine (US) tour dates</a>
           <script src="//widget.songkick.com/widget.js"></script>
         </div>
-        <!-- email -->
-        <div id="email_div">
-          <p>Enter your email to get Sunshine news in your inbox here:</p>
-          <form>
-            <input id="email_input" type="text" name="email" placeholder = "Let's folk rock!">
-            <button id="email_button">submit</button>
-          </form>
-        </div>
-        <!-- email end -->
+
         <!-- facebook etc -->
 
       </aside>
-      <div id="content" class="col-md-10">
+      <div id="content" class="col-md-8">
         <%= yield %>
       </div>
+      <div class="col-md-2">
+        <div id="follow_links" class="text-center"><p>Find us on the web</p>
+          <a href="https://www.facebook.com/sunshinenights" target="_blank"><img src="../../facebook.jpg"></a>
+          <a href="https://twitter.com/sunshinenights" target="_blank"><img src="../../twitter.jpg"></a>
+          <a href="http://sunshinenights.bandcamp.com" target="_blank"><img src="https://s1.bcbits.com/img/buttons/bandcamp_60x60_white.png"></a>
+          <a href="https://www.songkick.com/artists/8323538" target="_blank"><img src="../../songkick.jpg"></a>
+        </div>
+
+
+
+      <div id="email_div" class="text-center">
+
+        <!-- Begin MailChimp Signup Form -->
+
+
+        <div id="mc_embed_signup">
+          <form action="//sunshinenights.us3.list-manage.com/subscribe/post?u=dc7f4fa89eb56635e1b1c9426&amp;id=84ccb0f065" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+              <label for="mce-EMAIL">Subscribe to our mailing list</label>
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;"><input type="text" name="b_dc7f4fa89eb56635e1b1c9426_84ccb0f065" tabindex="-1" value=""></div>
+              <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+            </div>
+          </form>
+        </div>
+
+        <!--End mc_embed_signup-->
+
+      </div>
     </div>
-  </div>
-</body>
-</html>
+  </body>
+  </html>
