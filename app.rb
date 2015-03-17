@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'sinatra/reloader'
 require 'sqlite3'
 require 'json'
 require 'pry'
