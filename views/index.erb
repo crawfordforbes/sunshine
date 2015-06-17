@@ -4,21 +4,10 @@
 <div id="videos_wrapper" class="hidden"></div>
 <div id="news_wrapper" class="hidden"></div>
 <div id="carousel_wrapper" class="hidden">
- <ul >
-  <% pics.each do |pic| %>
-  <li class="paginate" style="display: inline-block; list-style: none;">
-    <a href="#" data-toggle="modal" data-target='#modal<%=pic.id %>'><img src=<%= pic.url %> style="height: 250px; width: auto; margin: 3px; border: solid 1px white; border-radius: 8px;"></a>
-    <div class="modal fade" id='modal<%=pic.id %>' tabindex="-1" role="dialog" aria-labelledby="">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <img src=<%= pic.url %> style="height: auto; width: 100%;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-  <% end %>
+  <input id="picscount" type="hidden" value=<%=pics%>>
+  <div id="thumbs">
+
+</div>
   <div id="page-nav"></div>
 </div>
 <script src="../scripts.js"></script>

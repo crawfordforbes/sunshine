@@ -100,101 +100,51 @@ contact_link.click(function(){
 })
 
 pics_link.click(function(){
-	hideAll();
-	pics_wrap.setAttribute("class", "")
-var pageParts = $(".paginate");
 
-    // How many parts do we have?
-    var numPages = pageParts.length;
-    // How many parts do we want per page?
-    var perPage = 15;
+	if (pics_wrap.className === "hidden") {
+		hideAll();
+		pics_wrap.setAttribute("class", "");
+		$.ajax({
+			url: '/pics',
+			type: 'get',
+			success: function(data){
+				for(var k = 0; k<data.length; k++){
+					var list = document.createElement('li');
+					list.setAttribute("class", "paginate");
+					list.setAttribute("style", "display: inline-block; list-style: none;")
+		
+					list.innerHTML = '<a href="#" data-toggle="modal" data-target="#modal' + data[k].id + '"><img src="' + data[k].url + '" style="height: 250px; width: auto; margin: 3px; border: solid 1px white; border-radius: 8px;"></a><div class="modal fade" id="modal<%=pic.id %>" tabindex="-1" role="dialog" aria-labelledby=""><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body"><img src="' + data[k].url + '" style="height: auto; width: 100%;"></div></div></div></div>';
+					var thumbs = document.getElementById("thumbs");
+					thumbs.appendChild(list)
+				};
+				var pageParts = $(".paginate");
 
-    // When the document loads we're on page 1
-    // So to start with... hide everything else
-    pageParts.slice(perPage).hide();
-    // Apply simplePagination to our placeholder
-    $("#page-nav").pagination({
-        items: numPages,
-        itemsOnPage: perPage,
-        cssStyle: "dark-theme",
-        // We implement the actual pagination
-        //   in this next function. It runs on
-        //   the event that a user changes page
-        onPageClick: function(pageNum) {
-            // Which page parts do we show?
-            var start = perPage * (pageNum - 1);
-            var end = start + perPage;
-
-            // First hide all page parts
-            // Then show those just for our page
-            pageParts.hide()
-                     .slice(start, end).show();
-        }
-    });
-
-
-
-
-		// $.ajax({
-		// 	url: '/pics',
-		// 	type: 'get',
-		// 	success: function(data){
-		// 		debugger
-		// 	}
-		// })
-
+				// How many parts do we have?
+				var numPages = $("#picscount").val();
+				// How many parts do we want per page?
+				var perPage = 15;
+				
+				// When the document loads we're on page 1
+				// So to start with... hide everything else
+				pageParts.slice(perPage).hide();
+				// Apply simplePagination to our placeholder
+				$("#page-nav").pagination({
+					items: numPages,
+					itemsOnPage: perPage,
+					cssStyle: "dark-theme",
+					onPageClick: function(pageNum) {
+						var start = perPage * (pageNum - 1);
+						var end = start + perPage;
+						pageParts.hide()
+						.slice(start, end).show();
+					}
+				});
+			}
+		})
+	}
 })
 
 
-
-
-// var show_pics = function(pics){
-// 	shows_wrap.setAttribute("class", "hidden")
-// 	press_wrap.setAttribute("class", "hidden")
-// 	pics_wrap.setAttribute("class", "hidden")
-// 	contact_wrap.setAttribute("class", "hidden")
-// 	videos_wrap.setAttribute("class", "hidden")
-// 	news_wrap.setAttribute("class", "hidden")
-// 	pics_wrap.setAttribute("class", "")
-// 	var pic_wrap = document.getElementById("pic_wrapper");
-// 	for (var i = 0; i < pics.length; i++) {
-// 		var divx = document.createElement('div')
-// 		divx.setAttribute("class", "item");
-// 		//make sure the fist div has a class of active so carousel knows where to start
-// 		if (i === 0) {
-// 			divx.setAttribute("class", "item active");
-// 		};
-// 		//creating an html object didn't go so well
-// 		var img = "<img src='" + pics[i].url + "'>"
-// 		pic_wrap.appendChild(divx);
-// 		divx.innerHTML=img;
-// 	};
-// }
-// //get pics from server
-// var get_pics = function(){
-// 	$.ajax({
-// 		url: '/pics',
-// 		type: 'get',
-// 		success: function(data){
-// 			show_pics(data)
-// 		}
-// 	})
-// }
-
-// pics_link.click(function(){
-// 	debugger
-// 	if (pics_wrap.innerHTML.length === 693){
-// 		get_pics()
-// 	} else {
-// 		news_wrap.setAttribute("class", "hidden")
-// 		shows_wrap.setAttribute("class", "hidden")
-// 		press_wrap.setAttribute("class", "hidden")
-// 		contact_wrap.setAttribute("class", "hidden")
-// 		videos_wrap.setAttribute("class", "hidden")
-// 		pics_wrap.setAttribute("class", "hidden")
-// 		pics_wrap.setAttribute("class", "")
-// 	}
-// })
 
 window.onload = function(){
 	getContent(news_link[0].id)

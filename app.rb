@@ -15,7 +15,8 @@ enable :sessions
 #landing page for user
 get '/' do
 		pics = Pic.where("carousel = ?", 1)
-	erb :index, locals: {pics: pics}
+
+	erb :index, locals: {pics: pics.length}
 end
 
 #respond to ajax for carousel
