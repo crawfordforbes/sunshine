@@ -8,6 +8,7 @@
     <button>Upload</button>
 </form>
 <br>
+<div style="border-bottom: 1px red solid;"></div>
 <br>
 <ul>
 	<% pics.each do |pic| %>
@@ -26,6 +27,7 @@
 				<input class="checkbox" id="<%= pic.id %>" type="checkbox" name="carousel"></p>
 			</li>
 		<% end %>
+		<div style="border-bottom: 1px red dashed; margin-bottom: 5px;"></div>
 	<% end %>
 
 </ul>

@@ -27,7 +27,7 @@ update.click(function(){
 		data: post_hash,
 		type: "put",
 		success: function(){
-			window.location.replace("http://www.sunshinenights.dev:4567/admin/posts");
+			window.location.replace("http://www.sunshinenights.com/admin/posts");
 		}
 	})
 });
@@ -38,7 +38,7 @@ del_button.click(function(){
 			url: '/admin/post/' + id,
 			type: 'delete',
 			success: function(){
-				window.location.replace("http://www.sunshinenights.dev:4567/admin/posts");
+				window.location.replace("http://www.sunshinenights.com/admin/posts");
 			}
 		});
 	} else {

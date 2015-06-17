@@ -17,13 +17,8 @@
 <option value="videos">Videos</option>
 <option value="contact">Contact</option>
 </select>
+If a show, please enter a date:
+<input type="date" name="date"></input>
 	<button>Submit</button>
 </form>
-<ul>
-	<% pics.each do |pic| %>
-	<li><img src="../../<%= pic.url %>" style="height: 200px; width: auto;">
-		<p>http://www.sunshinenights.com/<%= pic.url %></p>
-		<br>
-	</li>
-	<% end %>
-</ul>
+<a href="pic_window" target="_blank">click here to see your pictures</a>

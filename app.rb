@@ -14,7 +14,8 @@ enable :sessions
 
 #landing page for user
 get '/' do
-	erb :index
+		pics = Pic.where("carousel = ?", 1)
+	erb :index, locals: {pics: pics}
 end
 
 #respond to ajax for carousel
@@ -34,7 +35,7 @@ end
 #shows ajax
 get '/shows' do
 	content_type :json
-	shows = Post.where("section = ?", "shows").reverse_order
+	shows = Post.where("section = ? AND eventdate > ?", "shows", Time.now).order(:eventdate)
 	shows.to_json
 end
 
@@ -100,139 +101,147 @@ end
 get '/admin/pics' do
 	puts session[:valid_user]
 	if authenticated?
-	puts "GET ADMIN/PICS"
-	pics = Pic.all()
-	erb :"admin/pics", locals: {pics: pics}
-else
-	redirect '/admin/login'
-end
+		puts "GET ADMIN/PICS"
+		pics = Pic.all()
+		erb :"admin/pics", locals: {pics: pics}
+	else
+		redirect '/admin/login'
+	end
 end
 
 # upload a pic, save the file in public, and add the url and carousel status to the pics table
 post '/admin/pic' do
-		if authenticated?
-	puts "POST ADMIN/PIC"
+	if authenticated?
+		puts "POST ADMIN/PIC"
 
-	if params[:carousel_selection]
-		car = 1
-	else car = 0
-	end
-	tempfile = params[:file][:tempfile] 
-	filename = params[:file][:filename] 
-	cp(tempfile.path, "./public/#{filename}")
-	Pic.create(url: filename, carousel: car)
-	redirect '/admin/pics'
+		if params[:carousel_selection]
+			car = 1
+		else car = 0
+		end
+		tempfile = params[:file][:tempfile] 
+		filename = params[:file][:filename].gsub(" ", "_")
+		cp(tempfile.path, "./public/#{filename}")
+		Pic.create(url: filename, carousel: car)
+		redirect '/admin/pics'
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 # update carousel status of each pic
 put '/admin/pics' do
-		if authenticated?
-	checked_string = params.keys[0].split(',')
-	checked = []
-	checked_string.each do |id| 
-		checked<<id.to_i
-	end
-	puts checked
-	pics = Pic.all()
-	pics.each do |pic|
-		x = 0
-		while x < checked.length do
-			if pic.id == checked[x]
-				puts "in if: pic id = #{pic.id}, x = #{x}"
-				pic.update(carousel: 1)
-				x = checked.length
-			else 
-				puts "in else: pic id = #{pic.id}, x = #{x}"
-				pic.update(carousel: 0)
-				x += 1
+	if authenticated?
+		checked_string = params.keys[0].split(',')
+		checked = []
+		checked_string.each do |id| 
+			checked<<id.to_i
+		end
+		puts checked
+		pics = Pic.all()
+		pics.each do |pic|
+			x = 0
+			while x < checked.length do
+				if pic.id == checked[x]
+					puts "in if: pic id = #{pic.id}, x = #{x}"
+					pic.update(carousel: 1)
+					x = checked.length
+				else 
+					puts "in else: pic id = #{pic.id}, x = #{x}"
+					pic.update(carousel: 0)
+					x += 1
+				end
 			end
 		end
-	end
-	redirect '/admin/pics'
+		redirect '/admin/pics'
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 # show an individual pic
 get '/admin/pic/:id' do
-		if authenticated?
-	pic = Pic.find_by(id: params[:id])
-	erb :"admin/pic", locals: {pic: pic}
+	if authenticated?
+		pic = Pic.find_by(id: params[:id])
+		erb :"admin/pic", locals: {pic: pic}
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 #DESTROY!
 delete '/admin/pic/:id' do
-		if authenticated?
-	pic = Pic.find_by(id: params[:id])
-	filename = pic.url
-	pic.delete
-	File.delete("./public/#{filename}")
-	redirect '/admin/pics'
+	if authenticated?
+		pic = Pic.find_by(id: params[:id])
+		filename = pic.url
+		pic.delete
+		File.delete("./public/#{filename}")
+		redirect '/admin/pics'
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 #CRUD posts
 get '/admin/posts' do
-		if authenticated?
-	posts = Post.all()
-	erb :"admin/posts", locals: {posts: posts}
+	if authenticated?
+		posts = Post.all()
+		erb :"admin/posts", locals: {posts: posts}
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 #show individual post
 get '/admin/post/:id' do
-		if authenticated?
-	post = Post.find_by(id: params[:id])
-	pics = Pic.all()
-	erb :"admin/post", locals: {post: post, pics: pics}
+	if authenticated?
+		post = Post.find_by(id: params[:id])
+		pics = Pic.all()
+		erb :"admin/post", locals: {post: post, pics: pics}
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 #update post
 put '/admin/post' do
-		if authenticated?
-	puts params
-	post = Post.find_by(id: params[:id].to_i)
-	post.update(title: params[:title], story: params[:story], section: params[:section])
-	redirect '/admin/posts'
+	if authenticated?
+		puts params
+		post = Post.find_by(id: params[:id].to_i)
+		post.update(title: params[:title], story: params[:story], section: params[:section])
+		redirect '/admin/posts'
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 #create post
 post '/admin/post' do
-		if authenticated?
-	Post.create(title: params[:title], story: params[:story], section: params[:section])
-	redirect '/admin/posts'
+	if authenticated?
+
+		if params[:section] == "shows"
+			expire = params[:date] + " 23:59:00"
+			Post.create(title: params[:title], story: params[:story], section: params[:section], eventdate: expire)
+					binding.pry
+			redirect '/admin/posts'
+		else params[:section]
+			Post.create(title: params[:title], story: params[:story], section: params[:section])
+			redirect '/admin/posts'
+		end
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 #archive deleted post, delete post in regular post table
 delete '/admin/post/:id' do
-		if authenticated?
-	post = Post.find_by(id: params[:id])
-	Oldpost.create(title: post.title, story: post.story, section: post.section)
-	post.delete
-	redirect '/admin/posts'
+	if authenticated?
+		post = Post.find_by(id: params[:id])
+		Oldpost.create(title: post.title, story: post.story, section: post.section)
+		post.delete
+		redirect '/admin/posts'
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
 delete '/admin/logout' do
@@ -242,11 +251,19 @@ end
 
 #landing page for admin
 get '/admin' do
-		if authenticated?
-	pics = Pic.all()
-	erb :"admin/admin", locals: {pics: pics}
+	if authenticated?
+		pics = Pic.all()
+		erb :"admin/admin", locals: {pics: pics}
 	else
-	redirect '/admin/login'
-end
+		redirect '/admin/login'
+	end
 end
 
+get '/pic_window' do
+	if authenticated?
+		pics = Pic.all()
+		erb :"admin/pic_window", locals: {pics: pics}
+	else
+		redirect '/admin/login'
+	end
+end
