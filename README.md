@@ -1,5 +1,5 @@
 #[sunshinenights.com](http://www.sunshinenights.com)
-Sunshinenights.com consists of a single page application visible to regular visitors as well as a custom CMS for admins, allowing them to login, CRUD categorized posts, set expiration dates on posts, and manage media. 
+sunshinenights.com consists of a single page application visible to regular visitors as well as a custom CMS for admins, allowing them to login, CRUD categorized posts, set expiration dates on posts, and manage media. 
 
 ##Technologies used
 The back end is comprised of a Sinatra server, an SQLite3 database, and bcrypt.
