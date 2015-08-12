@@ -3,4 +3,4 @@ sunshinenights.com consists of a single page application visible to regular visi
 
 ##Technologies used
 The back end is comprised of a Sinatra server, an SQLite3 database, and bcrypt.
-the front end consists of vanilla JavaScript and JQuery, with the simplePagination.js library as well. Bootstrap is also used for styling.
+The front end consists of vanilla JavaScript and JQuery, with the simplePagination.js library as well. Bootstrap is also used for styling.
